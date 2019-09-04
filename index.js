@@ -4,6 +4,7 @@ const config = require("./config");
 const MemberService = require("./services/members.service");
 const PointService = require("./services/points.service");
 const database = require("./db");
+const sendList = require("./functions/sendList");
 
 database.connect();
 
@@ -12,6 +13,10 @@ client.on("ready", () =>
 );
 
 client.on("message", msg => {
+  /* 
+    Split the message into a list of arguments which we can use for 
+    determining which command and parameters are being requested/provided.
+  */
   const args = msg.content.split(" ");
 
   /* 
@@ -24,21 +29,21 @@ client.on("message", msg => {
 
   // Check if keyword's correct
   if (args[0] === config.keyword) {
+    // Delete message
+    msg.delete();
     // Reply shorthand
-    const reply = m => msg.reply(m);
+    const reply = m => msg.reply("\n```\n" + m + "\n```\n");
     // Cases go here
     switch (args[1]) {
       case "showMembers":
-        MemberService.showMembers((err, members) => {
-          if (err) {
-            reply(err);
-            return;
-          } else {
-            let list = "\n";
-            members.map((m, i) => (list += `${i + 1}. ${m.name}\n`));
-            reply(list);
-          }
-        });
+        MemberService.showMembers((err, members) =>
+          err ? reply(err) : sendList(members, reply)
+        );
+        break;
+      case "showMember":
+        MemberService.showMember(args[2], (err, points) =>
+          err ? reply(err) : reply(`${args[2]} - ${points} DKP`)
+        );
         break;
       case "addMember":
         MemberService.addMember(args[2], err =>
