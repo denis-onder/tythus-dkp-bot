@@ -13,7 +13,14 @@ client.on("ready", () =>
 
 client.on("message", msg => {
   const args = msg.content.split(" ");
-  // [0] - Keyword, [1] - Command, [2] - Username, [3] - Amount(Optional)
+
+  /* NOTE: Argument indexes:
+     [0] - Keyword, 
+     [1] - Command,
+     [2] - Username,
+     [3] - Amount(Optional)
+  */
+
   // Check if keyword's correct
   if (args[0] === config.keyword) {
     // () => Reply shorthand
