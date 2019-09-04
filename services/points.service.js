@@ -1,3 +1,5 @@
+const User = require("../db/models/user.model");
+
 class PointService {
   top10(callback) {
     // Gather a list of all members.
@@ -5,19 +7,33 @@ class PointService {
     // Else, send out an error message.
     callback();
   }
-  addDKP(name, amount, callback) {
-    // Check if a member exists with that name.
-    // If it does not, send out an error message.
+  async addDKP(name, amount, callback) {
+    const user = await User.findOne({ name });
+    // Check if an user exists with that name.
+    if (!user) {
+      // If it does not, send out an error message.
+      const errorMsg = `${name} does not exist within the database`;
+      callback(errorMsg, null);
+      throw new Error(errorMsg);
+    }
     // Add DKP to the member.
-    // As if there's no user, send out an error message.
-    callback();
+    user.points += amount;
+    await user.save();
+    callback(false, user.points);
   }
-  removeDKP(name, amount, callback) {
-    // Check if a member exists with that name.
-    // If it does not, send out an error message.
+  async removeDKP(name, amount, callback) {
+    const user = await User.findOne({ name });
+    // Check if an user exists with that name.
+    if (!user) {
+      // If it does not, send out an error message.
+      const errorMsg = `${name} does not exist within the database`;
+      callback(errorMsg, null);
+      throw new Error(errorMsg);
+    }
     // Remove DKP to the member.
-    // As if there's no user, send out an error message.
-    callback();
+    user.points -= amount;
+    await user.save();
+    callback(false, user.points);
   }
 }
 

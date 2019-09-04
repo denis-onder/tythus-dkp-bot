@@ -33,7 +33,7 @@ client.on("message", msg => {
     // Delete message
     msg.delete();
     // Reply shorthand
-    const reply = m => msg.reply("\n```\n" + m + "\n```\n");
+    const reply = m => msg.channel.send("\n```\n" + m + "\n```\n");
     // Cases go here
     switch (args[1]) {
       // The video that made the world a better place.
@@ -61,13 +61,13 @@ client.on("message", msg => {
         );
         break;
       case "addDKP":
-        PointService.addDKP(args[2], args[3], () =>
-          reply(`Adding DKP(${args[3]}) to ${args[2]}`)
+        PointService.addDKP(args[2], args[3], (err, points) =>
+          err ? reply(err) : reply(`${args[2]} - Points: ${points} DKP`)
         );
         break;
       case "removeDKP":
-        PointService.removeDKP(args[2], args[3], () =>
-          reply(`Removing DKP(${args[3]}) from ${args[2]}`)
+        PointService.removeDKP(args[2], args[3], (err, points) =>
+          err ? reply(err) : reply(`${args[2]} - Points: ${points} DKP`)
         );
         break;
     }
