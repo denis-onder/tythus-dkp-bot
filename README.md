@@ -20,3 +20,8 @@
 
 * `removeDKP <name> <amount>` - Remove DKP from a member
 
+---
+
+### Note:
+
+> The docker-compose file has been removed.
