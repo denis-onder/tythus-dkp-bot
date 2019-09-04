@@ -6,6 +6,7 @@ COPY . .
 
 ENV NODE_ENV=container
 
+# Provide your own token on the line below:
 ENV TOKEN=
 
 RUN npm install
