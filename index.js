@@ -8,9 +8,10 @@ const sendList = require("./functions/sendList");
 
 database.connect();
 
-client.on("ready", () =>
-  console.log(`Tythus running!\nEnvironment: ${config.environment}`)
-);
+client.on("ready", () => {
+  console.log(`Tythus running!\nEnvironment: ${config.environment}`);
+  client.user.setActivity(`the Onyxia Wipe Animation`);
+});
 
 client.on("message", msg => {
   /* 
@@ -35,6 +36,10 @@ client.on("message", msg => {
     const reply = m => msg.reply("\n```\n" + m + "\n```\n");
     // Cases go here
     switch (args[1]) {
+      // The video that made the world a better place.
+      case "fuck":
+        msg.reply("https://www.youtube.com/watch?v=HtvIYRrgZ04");
+        break;
       case "showMembers":
         MemberService.showMembers((err, members) =>
           err ? reply(err) : sendList(members, reply)
