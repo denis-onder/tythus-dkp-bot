@@ -6,8 +6,13 @@ COPY . .
 
 ENV NODE_ENV=container
 
-# Provide your own token on the line below:
+# Provide your own token and database details on the lines below:
+
 ENV TOKEN=
+
+ENV DB_NAME=
+
+ENV DB_PORT=
 
 RUN npm install
 
