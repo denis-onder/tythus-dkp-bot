@@ -2,6 +2,7 @@ const User = require("../db/models/user.model");
 
 class PointService {
   top10(callback) {
+    // TODO
     // Gather a list of all members.
     // If members exist, sort them top to bottom in relation of how much points they have.
     // Else, send out an error message.
