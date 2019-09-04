@@ -6,6 +6,7 @@ module.exports = {
   environment: process.env.NODE_ENV || "development",
   database: {
     name: process.env.DB_NAME,
-    port: process.env.DB_PORT
+    port: process.env.DB_PORT,
+    connectionURI: process.env.DB_URI
   }
 };
