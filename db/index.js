@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 module.exports = {
   connect: () =>
     mongoose.connect(
-      `mongodb://127.0.0.1:${config.database.port}/${config.database.name}`,
+      `mongodb://localhost:${config.database.port}/${config.database.name}`,
       { useNewUrlParser: true },
       err => {
         if (err) {

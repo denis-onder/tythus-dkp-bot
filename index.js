@@ -14,27 +14,40 @@ client.on("ready", () =>
 client.on("message", msg => {
   const args = msg.content.split(" ");
 
-  /* NOTE: Argument indexes:
-     [0] - Keyword, 
-     [1] - Command,
-     [2] - Username,
-     [3] - Amount(Optional)
+  /* 
+    NOTE: Argument indexes:
+    [0] - Keyword, 
+    [1] - Command,
+    [2] - Username,
+    [3] - Amount(Optional)
   */
 
   // Check if keyword's correct
   if (args[0] === config.keyword) {
-    // () => Reply shorthand
+    // Reply shorthand
     const reply = m => msg.reply(m);
     // Cases go here
     switch (args[1]) {
+      case "showMembers":
+        MemberService.showMembers((err, members) => {
+          if (err) {
+            reply(err);
+            return;
+          } else {
+            let list = "\n";
+            members.map((m, i) => (list += `${i + 1}. ${m.name}\n`));
+            reply(list);
+          }
+        });
+        break;
       case "addMember":
-        MemberService.addMember(args[2], () =>
-          reply(`${args[2]} has been added!`)
+        MemberService.addMember(args[2], err =>
+          err ? reply(err) : reply(`${args[2]} has been added!`)
         );
         break;
       case "removeMember":
-        MemberService.removeMember(args[2], () =>
-          reply(`${args[2]} has been removed.`)
+        MemberService.removeMember(args[2], err =>
+          err ? reply(err) : reply(`${args[2]} has been removed.`)
         );
         break;
       case "addDKP":
