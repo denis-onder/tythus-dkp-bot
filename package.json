@@ -1,0 +1,29 @@
+{
+  "name": "tythus-dkp-bot",
+  "version": "1.0.0",
+  "description": "DKP Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denis-onder/tythus-dkp-bot.git"
+  },
+  "author": "Denis Onder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denis-onder/tythus-dkp-bot/issues"
+  },
+  "homepage": "https://github.com/denis-onder/tythus-dkp-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.1.0",
+    "sequelize": "^5.18.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "nodemon": "^1.19.2"
+  }
+}
